@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <style>
+    html, body, #cesiumContainer {
+      width: 100%; height: 100%; margin: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="cesiumContainer"></div>
+
+<script>
+  window.CESIUM_BASE_URL = "https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/";
+
+  const viewer = new Cesium.Viewer("cesiumContainer", {
+      baseLayerPicker: false,
+      geocoder: false,
+      timeline: false,
+      animation: false,
+      terrainProvider: new Cesium.EllipsoidTerrainProvider()
+  });
+
+  const position = Cesium.Cartesian3.fromDegrees(72.5714, 23.0225, 500);
+
+  const entity = viewer.entities.add({
+      position: position,
+      model: {
+          uri: "/model.glb",
+          scale: 200.0
+      }
+  });
+
+  viewer.zoomTo(entity);
+</script>
+
+</body>
+</html>

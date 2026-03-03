@@ -16,12 +16,24 @@
   window.CESIUM_BASE_URL = "https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/";
 
   const viewer = new Cesium.Viewer("cesiumContainer", {
-      baseLayerPicker: false,
-      geocoder: false,
-      timeline: false,
-      animation: false,
-      terrainProvider: new Cesium.EllipsoidTerrainProvider()
-  });
+    baseLayerPicker: false,
+    geocoder: false,
+    timeline: false,
+    animation: false,
+    terrainProvider: new Cesium.EllipsoidTerrainProvider()
+});
+
+// Enable sun lighting
+viewer.scene.globe.enableLighting = false;
+
+// Brighten exposure
+viewer.scene.highDynamicRange = true;
+
+// Add strong directional light
+viewer.scene.light = new Cesium.DirectionalLight({
+    direction: viewer.scene.camera.direction,
+    intensity: 3.0
+});
 
   const position = Cesium.Cartesian3.fromDegrees(72.5714, 23.0225, 500);
 
